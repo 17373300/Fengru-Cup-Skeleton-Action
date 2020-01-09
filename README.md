@@ -4,7 +4,7 @@
 
 [GNN论文汇总](https://github.com/thunlp/GNNPapers/blob/master/README.md#computer-vision)
 
-Computer Vision教学视频：B站搜索`cs231n`（讲解了Neuronetword的基本概念，和CNN等常见模型，强烈推荐）
+Computer Vision教学视频：B站搜索`cs231n`（讲解了Neuro network的基本概念，和CNN等常见模型，强烈推荐）
 
 [GCN讲解](https://tkipf.github.io/graph-convolutional-networks/)
 
