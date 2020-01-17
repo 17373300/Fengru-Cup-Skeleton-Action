@@ -11,16 +11,29 @@
 2. Dependencies
    - **Packages**
       - Pytorch > 1.0.0
+      
       - [torchsample](https://github.com/MVIG-SJTU/AlphaPose/issues/71#issuecomment-398616495)
-      - [ffmpeg](https://ffmpeg.org/download.html)
+      
+      - [ffmpeg](https://ffmpeg.org/download.html )
+      
+        https://blog.csdn.net/qq_38261174/article/details/83175751
+      
       - tqdm
+      
       - pillow
+      
       - scipy
+      
       - pandas
+      
       - h5py
+      
       - visdom
+      
       - nibabel
+      
       - opencv-python (install with pip)
+      
       - matplotlib
    - **2D Joint detectors**
      - Alphapose (Recommended)
