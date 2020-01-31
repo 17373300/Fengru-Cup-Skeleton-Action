@@ -15,7 +15,7 @@ test_batch_size = 64
 early_stop_alpha = 5
 num_class = 60
 
-dataset_types = ['xview', 'xsub']
+dataset_types = ['xsub', 'xview']
 
 
 def train(model, train_data, train_label):
@@ -51,9 +51,9 @@ def train(model, train_data, train_label):
             right_cases, val_loss = 0, 0
             for batch_x, batch_y in val_dataLoader:
                 pred_y = model(batch_x)
-                right_cases += (torch.argmax(pred_y, dim=1) == batch_y.unsqueeze(1)).sum()
+                right_cases += (torch.argmax(pred_y, dim=1) == batch_y).sum()
                 val_loss += loss_func(pred_y, batch_y)
-            accuracy = right_cases / len(val_dataset)
+            accuracy = float(right_cases) / float(len(val_dataset))
             print(
                 '\033[1;35m val:\033[0m epoch: %d | loss: %.3f | accuracy: %.3f%%' % (epoch, val_loss, accuracy * 100))
 
@@ -85,9 +85,10 @@ def test(model, test_data, test_label):
         for step, (batch_x, batch_y) in enumerate(test_dataLoader):
             pred_y = model(batch_x)
             # print('size of pred_y: %d | size of batch_y: %d' % (len(pred_y), len(batch_y)))
-            right_cases += (torch.argmax(pred_y, dim=1) == batch_y.unsqueeze(1)).sum()
+            right_cases += (torch.argmax(pred_y, dim=1) == batch_y).sum()
+            print('right cases: %d | all cases: %d' % (right_cases, (step + 1) * test_batch_size))
             test_loss += loss_func(pred_y, batch_y)
-            cur_accuracy = right_cases / ((step + 1) * test_batch_size)
+            cur_accuracy = float(right_cases) / float(((step + 1) * test_batch_size))
             print('\033[1;35m test:\033[0m step %d finishes | test loss: %.3f | current accuracy: %.2f%%' % (
                 step, test_loss, cur_accuracy * 100))
         accuracy = right_cases / len(test_dataset)
