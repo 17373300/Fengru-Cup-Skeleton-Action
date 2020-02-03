@@ -69,7 +69,7 @@ def main(args):
         keypoints = detector_2d(video_name)
     else:
         npz = np.load(args.input_npz)
-        keypoints = npz['kpts']  # (N, 17, 2)
+        keypoints = npz['kpts']  # (N, 17, 2) for NTU (N, 25, 2)
 
     keypoints_symmetry = metadata['keypoints_symmetry']
     kps_left, kps_right = list(keypoints_symmetry[0]), list(keypoints_symmetry[1])
@@ -78,6 +78,9 @@ def main(args):
     # normlization keypoints  Suppose using the camera parameter
     keypoints = normalize_screen_coordinates(keypoints[..., :2], w=1000, h=1002)
 
+	# for NTU:
+	#model_pos = TemporalModel(25, 2, 25, filter_widths=[3, 3, 3, 3, 3], causal=args.causal, dropout=args.dropout, channels=args.channels,
+    #                          dense=args.dense)
     model_pos = TemporalModel(17, 2, 17, filter_widths=[3, 3, 3, 3, 3], causal=args.causal, dropout=args.dropout, channels=args.channels,
                               dense=args.dense)
     # model_pos.cuda_device = -1
